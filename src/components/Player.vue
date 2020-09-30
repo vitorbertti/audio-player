@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="player">
     <h4><i class="material-icons">equalizer</i>Podcast</h4>
     <div class="card">
       <div class="card-image"></div>
