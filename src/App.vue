@@ -50,4 +50,9 @@ h4 {
    height: 200px;
 }
 
+audio {
+   width: 100%;
+   margin-top: 30px;
+}
+
 </style>
