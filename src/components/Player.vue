@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import data from '../service/data';
+
 export default {
   name: 'Player',
   data: {
@@ -21,17 +23,12 @@ export default {
       title: document.querySelector('.card-content h5'),
       artist: document.querySelector('.card-content .artist'),
       audio: document.querySelector('audio'),
-      data: {
-        title: 'Como começei a programar / Por que criamos a Rocketseat / Nossa Stack',
-        artist: 'Diego Fernandes',
-        cover: '../assets/files/como-comecei.jpg',
-        file: '../assets/files/como-comecei.mp3',
-      },
       start: (() => {
-        this.player.cover.style.backgrond = `url('${this.player.data.cover}') no-repeat center center / cover`;
-        this.player.title.innerText = this.player.data.title;
-        this.player.artist.innerText = this.player.data.artist;
-        this.player.audio.src = this.player.data.file;
+        this.player.cover.style.backgrond = `url('${this.data.cover}') no-repeat center center / cover`;
+        this.player.title.innerText = this.data.title;
+        this.player.artist.innerText = this.data.artist;
+        this.player.audio.src = this.data.file;
+        this.player.audio.addEventListener('ended', () => {})
       }),
     }
   },
