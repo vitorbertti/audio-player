@@ -17,23 +17,27 @@ import data from '../service/data';
 
 export default {
   name: 'Player',
-  data: {
-    player = {
-      cover: document.querySelector('.card-image'),
-      title: document.querySelector('.card-content h5'),
-      artist: document.querySelector('.card-content .artist'),
-      audio: document.querySelector('audio'),
-      start: (() => {
-        this.player.cover.style.backgrond = `url('${this.data.cover}') no-repeat center center / cover`;
-        this.player.title.innerText = this.data.title;
-        this.player.artist.innerText = this.data.artist;
-        this.player.audio.src = this.data.file;
-        this.player.audio.addEventListener('ended', () => {})
-      }),
+  data() {
+    return {
+      player: {
+        cover: document.querySelector('.card-image'),
+        title: document.querySelector('.card-content h5'),
+        artist: document.querySelector('.card-content .artist'),
+        audio: document.querySelector('audio'),
+      }
     }
   },
   mounted() {
-    this.player.start();
+    this.start();
+  },
+  methods: {
+    start() {
+        this.player.cover.style.backgrond = `url('${data.cover}') no-repeat center center / cover`;
+        this.player.title.innerText = data.title;
+        this.player.artist.innerText = data.artist;
+        this.player.audio.src = data.file;
+        this.player.audio.addEventListener('ended', () => {})
+      },
   }
 }
 </script>

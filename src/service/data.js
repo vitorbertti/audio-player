@@ -1,4 +1,4 @@
-window.audios = [
+const data = [
    {
       title: 'Como começei a programar / Por que criamos a Rocketseat / Nossa Stack',
       artist: 'Diego Fernandes',
@@ -18,3 +18,5 @@ window.audios = [
       file: 'junior-pleno-ou-senior-qual-a-diferenca.mp3',
    },
 ];
+
+export default data;
