@@ -6,7 +6,7 @@
       <div class="card-content">
         <h5>Title</h5>
         <p class="artist">Artist</p>
-        <audio controls :src="audio" ></audio>
+        <audio controls ></audio>
         
       </div>
     </div>
@@ -24,23 +24,33 @@ export default {
         cover: {},
         title: {},
         artist: {},
-        audio: {},
+        audioData: {},
+        currentAudio: {},
       // }
     }
   },
   mounted() {
-    this.start();
+    window.addEventListener('load', this.start());
   },
   methods: {
     start() {
-        this.cover = { background: `url('${data[0].cover}') no-repeat center center / cover` };
+        this.cover = { background: `url('${this.path(data[0].cover)}') no-repeat center center / cover` };
         this.title = document.querySelector('.card-content h5');
         this.title.innerText = data[0].title;
         this.artist = document.querySelector('.card-content .artist');
         this.artist.innerText = data[0].artist;
-        this.audio = data[0].file;
-        // this.audio.addEventListener('ended', () => {})
-      },
+        this.currentAudio = this.audioData[0];
+        this.audio = document.querySelector('audio');
+        this.audio.src = this.path(this.currentAudio.file);
+        this.audio.addEventListener('ended', () => {
+          this.audio.src = this.path(this.audioData[1].file);
+          this.audio.play();
+        })
+    },
+    path(file) {
+      return `../assets/files/${file}`;
+    },
+
   }
 }
 </script>

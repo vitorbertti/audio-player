@@ -2,8 +2,8 @@ const data = [
    {
       title: 'Como começei a programar / Por que criamos a Rocketseat / Nossa Stack',
       artist: 'Diego Fernandes',
-      cover: '../assets/files/como-comecei.jpg',
-      file: '../assets/files/como-comecei.mp3',
+      cover: 'como-comecei.jpg',
+      file: 'como-comecei.mp3',
    },
    {
       title: '5 dicas para uma carreira sólida como programador',
