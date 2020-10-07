@@ -46,8 +46,10 @@ export default {
     },
     next() {
       this.currentPlaying++;
+      if(this.currentPlaying == this.audioData.length) {
+        this.restart();
+      }
       this.update();
-      this.audio.play();
     },
     update() {
       this.currentAudio = this.audioData[this.currentPlaying];
@@ -56,6 +58,10 @@ export default {
       this.title.innerText = data[currentPlaying].title;
       this.artist.innerText = data[currentPlaying].artist;
       this.audio.src = this.path(this.currentAudio.file);
+    },
+    restart() {
+      this.currentPlaying = 0;
+      this.update();
     },
     path(file) {
       return `../assets/files/${file}`;
