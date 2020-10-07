@@ -26,6 +26,7 @@ export default {
         artist: {},
         audioData: {},
         currentAudio: {},
+        currentPlaying: 0,
       // }
     }
   },
@@ -34,18 +35,27 @@ export default {
   },
   methods: {
     start() {
-        this.cover = { background: `url('${this.path(data[0].cover)}') no-repeat center center / cover` };
+        this.cover = document.querySelector('.card-image');
         this.title = document.querySelector('.card-content h5');
-        this.title.innerText = data[0].title;
         this.artist = document.querySelector('.card-content .artist');
-        this.artist.innerText = data[0].artist;
-        this.currentAudio = this.audioData[0];
         this.audio = document.querySelector('audio');
-        this.audio.src = this.path(this.currentAudio.file);
-        this.audio.addEventListener('ended', () => {
-          this.audio.src = this.path(this.audioData[1].file);
-          this.audio.play();
-        })
+
+        this.update();
+
+        this.audio.onended  = () => this.next();
+    },
+    next() {
+      this.currentPlaying++;
+      this.update();
+      this.audio.play();
+    },
+    update() {
+      this.currentAudio = this.audioData[this.currentPlaying];
+
+      this.cover = { background: `url('${this.path(data[currentPlaying].cover)}') no-repeat center center / cover` };
+      this.title.innerText = data[currentPlaying].title;
+      this.artist.innerText = data[currentPlaying].artist;
+      this.audio.src = this.path(this.currentAudio.file);
     },
     path(file) {
       return `../assets/files/${file}`;
