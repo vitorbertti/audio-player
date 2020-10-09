@@ -4,13 +4,12 @@
     <div class="card">
       <div class="card-image" :style="cover">
         <a href="#" class="btn-floating btn-large halfway-fab">
-          <i class="material-icons">play_arrow</i>
+          <i class="material-icons" id="play-pause">play_arrow</i>
         </a>
       </div>
       <div class="card-content">
         <h5>Title</h5>
         <p class="artist">Artist</p>
-        <!-- <audio controls ></audio> -->
 
         <div class="row valign-wrapper">
           <div class="col s2" id="current-duration">00:00</div>
@@ -22,7 +21,7 @@
           <div class="col s2" id="total-duration">00:00</div>
           <div>
             <a href="#">
-              <i class="material-icons">volume_up</i>
+              <i class="material-icons" id="vol">volume_up</i>
             </a>
             
           </div>
@@ -97,5 +96,25 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+  #play-pause {
+    background-color: #7159c1;
+  }
+
+  #vol {
+    color: #7159c1;
+  }
+
+  input[type="range"] ::-webkit-slider-thumb {
+    background-color: #7159c1;
+  }
+
+  input[type="range"] ::-moz-range-thumb {
+    background-color: #7159c1;
+  }
+
+  input[type="range"] ::-ms-thumb {
+    background-color: #7159c1;
+  }
 
 </style>
