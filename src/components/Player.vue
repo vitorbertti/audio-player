@@ -50,6 +50,7 @@ export default {
         audioData: {},
         currentAudio: {},
         currentPlaying: 0,
+        audio: {},
       // }
     }
   },
@@ -61,7 +62,7 @@ export default {
         this.cover = document.querySelector('.card-image');
         this.title = document.querySelector('.card-content h5');
         this.artist = document.querySelector('.card-content .artist');
-        this.audio = document.querySelector('audio');
+        // this.audio = document.querySelector('audio');
 
         this.update();
 
@@ -80,7 +81,10 @@ export default {
       this.cover = { background: `url('${this.path(data[currentPlaying].cover)}') no-repeat center center / cover` };
       this.title.innerText = data[currentPlaying].title;
       this.artist.innerText = data[currentPlaying].artist;
-      this.audio.src = this.path(this.currentAudio.file);
+      this.createAudioElement(this.path(this.currentAudio.file));
+    },
+    createAudioElement(audio) {
+      this.audio = new Audio(audio);
     },
     restart() {
       this.currentPlaying = 0;
