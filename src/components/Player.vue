@@ -48,6 +48,7 @@ export default {
          currentPlaying: 0,
          audio: {},
          playPause: {},
+         isPlaying: false,
          // }
       };
    },
@@ -86,12 +87,23 @@ export default {
       createAudioElement(audio) {
          this.audio = new Audio(audio);
       },
-      actions() {
-        
-        this.
+      actions() {  
+        this.playPause.onclick = () => this.togglePlayPause();
       },
       play() {
+        this.isPlaying = true;
         this.audio.play();
+      },
+      pause() {
+         this.isPlaying = false;
+         this.audio.pause();
+      },
+      togglePlayPause() {
+         if ( this.isPlaying ) {
+            this.pause();
+         }else {
+            this.play();
+         }
       },
       restart() {
          this.currentPlaying = 0;
