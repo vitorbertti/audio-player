@@ -61,6 +61,7 @@ export default {
          this.title = document.querySelector('.card-content h5');
          this.artist = document.querySelector('.card-content .artist');
          this.playPause = document.querySelector('#play-pause');
+         this.vol = document.querySelector('#vol');
          // this.audio = document.querySelector('audio');
 
          this.update();
@@ -89,14 +90,17 @@ export default {
       },
       actions() {  
         this.playPause.onclick = () => this.togglePlayPause();
+        this.vol.onclick = () => this.toggleMute();
       },
       play() {
         this.isPlaying = true;
         this.audio.play();
+        this.playPause.innerText = 'pause';
       },
       pause() {
          this.isPlaying = false;
          this.audio.pause();
+         this.playPause.innerText = 'play_arrow';
       },
       togglePlayPause() {
          if ( this.isPlaying ) {
@@ -104,6 +108,10 @@ export default {
          }else {
             this.play();
          }
+      },
+      toggleMute() {
+         this.audio.muted = !this.audio.muted;
+         this.vol.innerText = this.audio.muted ? 'volume_down' : 'volume_up';
       },
       restart() {
          this.currentPlaying = 0;
