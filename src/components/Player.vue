@@ -62,6 +62,7 @@ export default {
          this.artist = document.querySelector('.card-content .artist');
          this.playPause = document.querySelector('#play-pause');
          this.vol = document.querySelector('#vol');
+         this.volume = document.querySelector('#vol-control')
          // this.audio = document.querySelector('audio');
 
          this.update();
@@ -91,6 +92,8 @@ export default {
       actions() {  
         this.playPause.onclick = () => this.togglePlayPause();
         this.vol.onclick = () => this.toggleMute();
+        this.volume.oninput = () => this.setVolume(this.volume.value);
+        this.volume.onchange = () => this.setVolume(this.volume.value);
       },
       play() {
         this.isPlaying = true;
@@ -113,6 +116,9 @@ export default {
          this.audio.muted = !this.audio.muted;
          this.vol.innerText = this.audio.muted ? 'volume_down' : 'volume_up';
       },
+      setVolume(value) {
+         this.audio.volume = value / 100;
+      },
       restart() {
          this.currentPlaying = 0;
          this.update();
@@ -132,6 +138,7 @@ export default {
 
 #vol {
    color: #7159c1;
+   transform: translate(2px);
 }
 
 input[type='range'] ::-webkit-slider-thumb {
