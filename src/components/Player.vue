@@ -62,7 +62,8 @@ export default {
          this.artist = document.querySelector('.card-content .artist');
          this.playPause = document.querySelector('#play-pause');
          this.vol = document.querySelector('#vol');
-         this.volume = document.querySelector('#vol-control')
+         this.volume = document.querySelector('#vol-control');
+         this.seekbar = document.querySelector('#seekbar');
          // this.audio = document.querySelector('audio');
 
          this.update();
@@ -85,6 +86,7 @@ export default {
          this.title.innerText = data[currentPlaying].title;
          this.artist.innerText = data[currentPlaying].artist;
          this.createAudioElement(this.path(this.currentAudio.file));
+         this.seekbar.max = this.audio.duration;
       },
       createAudioElement(audio) {
          this.audio = new Audio(audio);
@@ -94,6 +96,8 @@ export default {
         this.vol.onclick = () => this.toggleMute();
         this.volume.oninput = () => this.setVolume(this.volume.value);
         this.volume.onchange = () => this.setVolume(this.volume.value);
+        this.seekbar.oninput = () => this.setSeek(this.seekbar.value);
+        this.seekbar.onchange = () => this.setSeek(this.seekbar.value);      
       },
       play() {
         this.isPlaying = true;
@@ -118,6 +122,9 @@ export default {
       },
       setVolume(value) {
          this.audio.volume = value / 100;
+      },
+      setSeek(value) {
+         this.audio.currentTime = value;
       },
       restart() {
          this.currentPlaying = 0;
