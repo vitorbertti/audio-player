@@ -64,7 +64,8 @@ export default {
          this.vol = document.querySelector('#vol');
          this.volume = document.querySelector('#vol-control');
          this.seekbar = document.querySelector('#seekbar');
-         // this.audio = document.querySelector('audio');
+         this.currentDuration = document.querySelector('#current-duration');
+         this.totalDuration = document.queryCommandIndeterm('#total-duration');
 
          this.update();
 
@@ -86,7 +87,11 @@ export default {
          this.title.innerText = data[currentPlaying].title;
          this.artist.innerText = data[currentPlaying].artist;
          this.createAudioElement(this.path(this.currentAudio.file));
-         this.seekbar.max = this.audio.duration;
+         
+         this.audio.onloadeddata = () => {
+            this.actions();
+         }
+         
       },
       createAudioElement(audio) {
          this.audio = new Audio(audio);
@@ -97,7 +102,9 @@ export default {
         this.volume.oninput = () => this.setVolume(this.volume.value);
         this.volume.onchange = () => this.setVolume(this.volume.value);
         this.seekbar.oninput = () => this.setSeek(this.seekbar.value);
-        this.seekbar.onchange = () => this.setSeek(this.seekbar.value);      
+        this.seekbar.onchange = () => this.setSeek(this.seekbar.value);
+        this.seekbar.max = this.audio.duration;
+        this.totalDuration.innerText = this.secondsToMinutes(this.audio.duration); 
       },
       play() {
         this.isPlaying = true;
@@ -133,6 +140,11 @@ export default {
       path(file) {
          return `../assets/files/${file}`;
       },
+      secondsToMinutes(time) {
+         const minutes = Math.floor(time / 60);
+         const seconds = Math.floor(time % 60);
+         return `${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`
+      }
    },
 };
 </script>
