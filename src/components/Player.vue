@@ -69,7 +69,7 @@ export default {
 
          this.update();
 
-         this.audio.onended = () => this.next();
+         
       },
       next() {
          this.currentPlaying++;
@@ -77,6 +77,7 @@ export default {
             this.restart();
          }
          this.update();
+         this.play();
       },
       update() {
          this.currentAudio = this.audioData[this.currentPlaying];
@@ -97,6 +98,8 @@ export default {
          this.audio = new Audio(audio);
       },
       actions() {  
+        this.audio.onended = () => this.next();
+        this.audio.ontimeupdate = () => this.timeUpdate();
         this.playPause.onclick = () => this.togglePlayPause();
         this.vol.onclick = () => this.toggleMute();
         this.volume.oninput = () => this.setVolume(this.volume.value);
@@ -144,6 +147,10 @@ export default {
          const minutes = Math.floor(time / 60);
          const seconds = Math.floor(time % 60);
          return `${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`
+      },
+      timeUpdate() {
+         this.currentDuration.innerText = this.secondsToMinutes(this.audio.currentTime);
+         this.seekbar.value = this.audio.currentTime;
       }
    },
 };
